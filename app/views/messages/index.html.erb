@@ -13,9 +13,32 @@
 </div>
 
 <%= form_for(@message) do |f| %>
-　<%= f.label :name,"名前:"%><%= f.text_field :name, class: "form-control"%>
-　
+<% if @message.errors.present? %>
+
+    <div class="alert alert-danger">
+      
+<%= alert %>
+
+      <ul>
+        
+<% @message.errors.full_messages.each do |full_message| %>
+
+          <li>
+            
+<%= full_message %>
+
+          </li>
+        
+<% end %>
+ 
+      </ul>
+    </div>
   
-  <%= f.label :body, "内容:"%><%= f.text_area :body, class: "form-control", size: "20x3" %>
+<% end %>
+名前:
+　<%= f.text_field :name, class: "form-control"%>
+　
+内容:  
+  <%= f.text_area :body, class: "form-control", size: "20x3" %>
   <%= f.submit class: "btn btn-sm btn-primary" %>
 <% end %>
